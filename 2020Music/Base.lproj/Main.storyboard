@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uv2-td-CQe">
+                                <rect key="frame" x="142" y="270" width="90" height="30"/>
+                                <state key="normal" title="加载webview"/>
+                                <connections>
+                                    <action selector="loadwebview:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aRn-HD-CQC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZiV-u4-iUy">
+                                <rect key="frame" x="1" y="305" width="373" height="30"/>
+                                <state key="normal" title="webview播放视频后获取video下载链接并下载分离mp3"/>
+                                <connections>
+                                    <action selector="getDownloadVideoUrlAndSeparationMp3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5hg-ml-JZ7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gA6-DX-T7H">
+                                <rect key="frame" x="141" y="340" width="93" height="30"/>
+                                <state key="normal" title="下载测试mp4"/>
+                                <connections>
+                                    <action selector="downloadTestMp4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J8V-0k-BRv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asi-3N-jll">
+                                <rect key="frame" x="126" y="375" width="123" height="30"/>
+                                <state key="normal" title="测试视频分离mp3"/>
+                                <connections>
+                                    <action selector="separationMp3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KgE-mc-B5K"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="17k-a1-O6x">
+                                <rect key="frame" x="77" y="410" width="220" height="30"/>
+                                <state key="normal" title="使用AVPlayer播放音乐.M4A格式"/>
+                                <connections>
+                                    <action selector="createAvplayer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ptA-hh-TR9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MW7-Lg-KFH">
+                                <rect key="frame" x="85" y="445" width="204" height="30"/>
+                                <state key="normal" title="暂停/开始播放AVPlayer中音乐"/>
+                                <connections>
+                                    <action selector="pasueAVPlayer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KDC-ew-6Yf"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVPlayer暂无状态" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izs-7g-hPN">
+                                <rect key="frame" x="118.5" y="480" width="138" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.60828192188452301" green="0.73843724177981451" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gA6-DX-T7H" firstAttribute="top" secondItem="ZiV-u4-iUy" secondAttribute="bottom" constant="5" id="2oq-7A-V3u"/>
+                            <constraint firstItem="Izs-7g-hPN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3OU-vD-R7M"/>
+                            <constraint firstItem="MW7-Lg-KFH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="D61-rW-FvN"/>
+                            <constraint firstItem="MW7-Lg-KFH" firstAttribute="top" secondItem="17k-a1-O6x" secondAttribute="bottom" constant="5" id="KAz-eu-wJu"/>
+                            <constraint firstItem="Izs-7g-hPN" firstAttribute="top" secondItem="MW7-Lg-KFH" secondAttribute="bottom" constant="5" id="KPc-9B-Vnp"/>
+                            <constraint firstItem="17k-a1-O6x" firstAttribute="top" secondItem="Asi-3N-jll" secondAttribute="bottom" constant="5" id="LdV-4j-H28"/>
+                            <constraint firstItem="ZiV-u4-iUy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OlA-13-zs2"/>
+                            <constraint firstItem="gA6-DX-T7H" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YLP-qm-GUi"/>
+                            <constraint firstItem="uv2-td-CQe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yvq-CU-UQe"/>
+                            <constraint firstItem="ZiV-u4-iUy" firstAttribute="top" secondItem="uv2-td-CQe" secondAttribute="bottom" constant="5" id="cUh-ty-vKf"/>
+                            <constraint firstItem="uv2-td-CQe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="250" id="qMR-xX-xl0"/>
+                            <constraint firstItem="17k-a1-O6x" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rT4-MO-ePf"/>
+                            <constraint firstItem="Asi-3N-jll" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="v6H-07-rw1"/>
+                            <constraint firstItem="Asi-3N-jll" firstAttribute="top" secondItem="gA6-DX-T7H" secondAttribute="bottom" constant="5" id="z18-2L-wXI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="playerStateLable" destination="Izs-7g-hPN" id="Y63-nv-BOR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
