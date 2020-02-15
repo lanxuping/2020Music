@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS响应</title>
+    <script>
+        function showAlert(str){
+            alert('点击响应了,我是弹框 '+str)
+        }
+        var Ks=function(a){
+            a=a.split("");
+            Js.MR(a,8);
+            Js.kF(a,37);
+            Js.MR(a,57);
+            Js.MR(a,44);
+            Js.yT(a,1);
+            Js.MR(a,53);
+            Js.kF(a,30);
+            return a.join("")
+        };
+        var Js={
+            MR:function(a,b){
+                var c=a[0];
+                a[0]=a[b%a.length];
+                a[b%a.length]=c
+            },
+            yT:function(a,b){
+                a.splice(0,b)
+            },
+            kF:function(a){
+                a.reverse()
+            }
+        };
+        function decipher(){
+            return Ks('RLgxI2wwAQIhAMoRkVDLlV1XX7t1rMOK6VLMAUH5n9HjfOaXk-=GlJ4OAiBEPpmhqKonXX2CsFoyfW057VKYqufbz1eib0ZbQdPQKw=PU')
+        };
+        function drawRect() {
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+
+            ctx.moveTo(10,10);
+            ctx.lineTo(150,200);
+            ctx.lineTo(290,10);
+            ctx.closePath();
+
+            ctx.fillStyle="#FF0000";
+            ctx.strokeStyle="#00FFF";
+            ctx.lineWidth=10;
+
+            ctx.stroke();
+            ctx.fill();
+        }
+    
+
+    </script>
+</head>
+<body>
+    <input type="button" name="点击响应" value="哈哈" onclick="showAlert('点我了?')"><br/>
+    <input type="button" value="求两个数的和" onclick="decipher()"><br/>
+    <input type="button" value="画图" onclick="drawRect()"><br/>
+    <canvas width="300px" height="300px" id="myCanvas"style="background-color: aqua"/>
+</body>
+</html>

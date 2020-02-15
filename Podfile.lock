@@ -18,11 +18,15 @@ PODS:
     - Reachability (~> 3.0)
   - Masonry (1.1.0)
   - Reachability (3.2)
+  - youtube-ios-player-helper (0.1.6)
+  - YYModel (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking
   - FreeStreamer
   - Masonry
+  - youtube-ios-player-helper (~> 0.1.4)
+  - YYModel
 
 SPEC REPOS:
   trunk:
@@ -30,13 +34,17 @@ SPEC REPOS:
     - FreeStreamer
     - Masonry
     - Reachability
+    - youtube-ios-player-helper
+    - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   FreeStreamer: 7e9c976045701ac2f7e9c14c17245203c37bf2ea
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 67559cc831fd8d36246dc3652bd5ed05d05ed630
+PODFILE CHECKSUM: 2e50cbb27b930ed814ca24f2395c5fb74ea71517
 
 COCOAPODS: 1.8.0.beta.2

@@ -13,26 +13,62 @@
 #import <WebKit/WebKit.h>
 #import <FSAudioStream.h>
 #import <AVKit/AVKit.h>
+#import "YoutubeExtractor.h"
+#import "PSYouTubeExtractor.h"
+#import <youtube_ios_player_helper/youtube-ios-player-helper-umbrella.h>
+#import "YoutubeDownloadUrl.h"
+
+static NSString *patYtPlayer = @"<\\s*script\\s*>((.+?)jsbin\\\\/(player(_ias)?-(.+?).js)(.+?))</\\s*script\\s*>";
+static NSString *patDecryptionJsFile = @"jsbin\\\\/(player(_ias)?-(.+?).js)";
+static NSString *patCipher = @"\"cipher\"\\s*:\\s*\"(.+?)\"";
 
 
-@interface ViewController () <WKNavigationDelegate>
+@interface ViewController () <WKNavigationDelegate, YTPlayerViewDelegate>
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) FSAudioStream *audioStream;
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) NSString *downloadM4A;
 @property (weak, nonatomic) IBOutlet UILabel *playerStateLable;
 @property (nonatomic, strong) NSString *musicName;
+@property (nonatomic ,strong) YoutubeDownloadUrl *down;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    //arxdY8in7fY
+    //nbqMIBYJlvk
+    self.down = [[YoutubeDownloadUrl alloc] init];
+    [self.down  getStreamUrlsWithVideoID:@"j6hnv6CAAQA"];
 }
+
+- (void)youtubePlayerHelperView {
+    YTPlayerView *v = [[YTPlayerView alloc] initWithFrame:CGRectMake(20, 60, 300, 150)];
+    NSDictionary *playerVars = @{
+        @"playsinline" : @1,
+        @"origin": @"https://www.youtube.com"
+    };
+    [v loadWithVideoId:@"nbqMIBYJlvk" playerVars:playerVars];
+    [self.view addSubview:v];
+}
+- (void)signTest {
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:[NSURL URLWithString:@"https://youtube.com/watch?v=nbqMIBYJlvk"] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSString *videoQuery = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        NSString *streamMap = nil;
+        streamMap = [self matchFirstLinkWithStr:videoQuery withMatchStr:patYtPlayer];
+        streamMap = [streamMap stringByReplacingOccurrencesOfString:@"\\\"" withString:@"\""];
+        NSString *currentJsFileName = nil;
+        currentJsFileName = [self matchFirstLinkWithStr:streamMap withMatchStr:patDecryptionJsFile];
+        currentJsFileName = [currentJsFileName stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"];
+        NSLog(@"1");
+    }] resume];
+}
+
 - (IBAction)loadwebview:(id)sender {
     NSString *v1 = @"https://www.youtube.com/embed/vSBcrmx4aFw";//4min
-    NSString *v2 = @"https://www.youtube.com/embed/arxdY8in7fY";//8min
+//    NSString *v2 = @"https://www.youtube.com/embed/arxdY8in7fY";//8min
     [self loadYoutubeWebviewWirhUrl:v1];
 }
 - (IBAction)getDownloadVideoUrlAndSeparationMp3:(id)sender {
@@ -120,7 +156,7 @@
     config.mediaTypesRequiringUserActionForPlayback = NO;//把手动播放设置NO ios(8.0, 9.0)
     config.allowsInlineMediaPlayback = YES;//是否允许内联(YES)或使用本机全屏控制器(NO)，默认是NO。
     config.allowsAirPlayForMediaPlayback = YES;//允许播放，ios(8.0, 9.0)
-    self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(50, 50, self.view.frame.size.width-100, 180) configuration:config];
+    self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(50, 50, self.view.frame.size.width-100, 280) configuration:config];
     self.webView.navigationDelegate = self;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?autoplay=1&playsinline=1",url]]]];
     [self.view addSubview:self.webView];
@@ -150,6 +186,7 @@
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     NSLog(@"%@",error);
 }
+
 #pragma mark - avplayer
 - (void)avplayerPlayMusicLocal:(BOOL)local {
     self.player = [[AVPlayer alloc]init];
@@ -176,6 +213,7 @@
     [self.player replaceCurrentItemWithPlayerItem:playerItem];
     [playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];// 监听status属性
 }
+
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     AVPlayerItem *item = object;
     //判断监听对象的状态
@@ -191,6 +229,7 @@
         }
     }
 }
+
 #pragma mark - freestream music （暂未知为啥播放不了转的mp3和ma4文件）
 - (void)freestreamPlayMusic {
     _audioStream = [[FSAudioStream alloc] init];
@@ -211,4 +250,70 @@
         NSURL *url = [NSURL fileURLWithPath:[urlStr stringByAppendingPathComponent:@"888f31ee856d3a8f01673ea347b715a5.m4a"]];
         [_audioStream playFromURL:url];
 }
+
+#pragma mark - 正则
+- (NSMutableArray *)_matchLinkWithStr:(NSString *)str withMatchStr:(NSString *)matchRegex {
+    if (!matchRegex || str) {
+        return nil;
+    }
+    NSError *error = NULL;
+    NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:matchRegex options:NSRegularExpressionCaseInsensitive error:&error];
+    if (!reg) {
+        return nil;
+    }
+    NSArray *match = [reg matchesInString:str
+                                  options:NSMatchingReportCompletion
+                                  range:NSMakeRange(0, [str length])];
+    
+    NSMutableArray *rangeArr = [NSMutableArray array];
+    // 取得所有的NSRange对象
+    if(match.count != 0) {
+        for (NSTextCheckingResult *matc in match) {
+            NSRange range = [matc range];
+            NSValue *value = [NSValue valueWithRange:range];
+            [rangeArr addObject:value];
+        }
+    }
+    // 将要匹配的值取出来,存入数组当中
+    __block NSMutableArray *mulArr = [NSMutableArray array];
+    [rangeArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSValue *value = (NSValue *)obj;
+        NSRange range = [value rangeValue];
+        [mulArr addObject:[str substringWithRange:range]];
+    }];
+    return mulArr;
+}
+
+- (NSString *)matchFirstLinkWithStr:(NSString *)str withMatchStr:(NSString *)matchRegex {
+    if (!matchRegex || !str) {
+        return nil;
+    }
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:matchRegex options:NSRegularExpressionAnchorsMatchLines error:&error];
+    NSTextCheckingResult *firstMatch = [regex firstMatchInString:str options:0 range:NSMakeRange(0, [str length])];
+    if (firstMatch) {
+        NSRange resultRange = [firstMatch rangeAtIndex:0];
+        //从urlString中截取数据
+        NSString *result = [str substringWithRange:resultRange];
+        return result;
+    }
+    return nil;
+}
+
+#pragma mark - base64
+-(NSString *)base64EncodeString:(NSString *)string{
+    //1、先转换成二进制数据
+    NSData *data =[string dataUsingEncoding:NSUTF8StringEncoding];
+    //2、对二进制数据进行base64编码，完成后返回字符串
+    return [data base64EncodedStringWithOptions:0];
+}
+
+-(NSString *)base64DecodeString:(NSString *)string{
+    //注意：该字符串是base64编码后的字符串
+    //1、转换为二进制数据（完成了解码的过程）
+    NSData *data=[[NSData alloc]initWithBase64EncodedString:string options:0];
+    //2、把二进制数据转换成字符串
+    return [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+}
+
 @end

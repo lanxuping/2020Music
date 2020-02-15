@@ -16,7 +16,11 @@
 		875D44B523ED566D00659FD5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 875D44B423ED566D00659FD5 /* main.m */; };
 		875D44BD23ED588900659FD5 /* NSString+Md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 875D44BC23ED588900659FD5 /* NSString+Md5.m */; };
 		875D44C023ED592700659FD5 /* AVSeparation.m in Sources */ = {isa = PBXBuildFile; fileRef = 875D44BF23ED592700659FD5 /* AVSeparation.m */; };
-		875D44C323ED59B700659FD5 /* AVPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 875D44C223ED59B700659FD5 /* AVPlayerViewController.m */; };
+		878A7E5A23F2523D009C98F3 /* PSYouTubeExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 878A7E5923F2523D009C98F3 /* PSYouTubeExtractor.m */; };
+		878A7E5F23F3ADF2009C98F3 /* YoutubeDownloadUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 878A7E5E23F3ADF2009C98F3 /* YoutubeDownloadUrl.m */; };
+		878CAA0323F7BDDC00C00717 /* JSDemo.html in Resources */ = {isa = PBXBuildFile; fileRef = 878CAA0223F7BDDB00C00717 /* JSDemo.html */; };
+		87FDFC6223F15E0000F44AB2 /* YoutubeExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FDFC6123F15E0000F44AB2 /* YoutubeExtractor.m */; };
+		87FDFC6823F1912700F44AB2 /* YoutubeStreamingDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FDFC6723F1912700F44AB2 /* YoutubeStreamingDataModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,9 +40,16 @@
 		875D44BC23ED588900659FD5 /* NSString+Md5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Md5.m"; sourceTree = "<group>"; };
 		875D44BE23ED592700659FD5 /* AVSeparation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVSeparation.h; sourceTree = "<group>"; };
 		875D44BF23ED592700659FD5 /* AVSeparation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVSeparation.m; sourceTree = "<group>"; };
-		875D44C123ED59B700659FD5 /* AVPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVPlayerViewController.h; sourceTree = "<group>"; };
-		875D44C223ED59B700659FD5 /* AVPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVPlayerViewController.m; sourceTree = "<group>"; };
 		875D44C423ED60E400659FD5 /* testvideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testvideo.mp4; sourceTree = "<group>"; };
+		878A7E5823F2523C009C98F3 /* PSYouTubeExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSYouTubeExtractor.h; sourceTree = "<group>"; };
+		878A7E5923F2523D009C98F3 /* PSYouTubeExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSYouTubeExtractor.m; sourceTree = "<group>"; };
+		878A7E5D23F3ADF2009C98F3 /* YoutubeDownloadUrl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoutubeDownloadUrl.h; sourceTree = "<group>"; };
+		878A7E5E23F3ADF2009C98F3 /* YoutubeDownloadUrl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoutubeDownloadUrl.m; sourceTree = "<group>"; };
+		878CAA0223F7BDDB00C00717 /* JSDemo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = JSDemo.html; sourceTree = "<group>"; };
+		87FDFC6023F15E0000F44AB2 /* YoutubeExtractor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoutubeExtractor.h; sourceTree = "<group>"; };
+		87FDFC6123F15E0000F44AB2 /* YoutubeExtractor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoutubeExtractor.m; sourceTree = "<group>"; };
+		87FDFC6623F1912700F44AB2 /* YoutubeStreamingDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoutubeStreamingDataModel.h; sourceTree = "<group>"; };
+		87FDFC6723F1912700F44AB2 /* YoutubeStreamingDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoutubeStreamingDataModel.m; sourceTree = "<group>"; };
 		B3B61AFDB68E09E742D356F5 /* Pods_2020Music.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_2020Music.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -83,14 +94,21 @@
 		875D44A423ED566D00659FD5 /* 2020Music */ = {
 			isa = PBXGroup;
 			children = (
+				878CAA0223F7BDDB00C00717 /* JSDemo.html */,
+				878A7E5823F2523C009C98F3 /* PSYouTubeExtractor.h */,
+				878A7E5923F2523D009C98F3 /* PSYouTubeExtractor.m */,
 				875D44A523ED566D00659FD5 /* AppDelegate.h */,
 				875D44A623ED566D00659FD5 /* AppDelegate.m */,
 				875D44A823ED566D00659FD5 /* ViewController.h */,
 				875D44A923ED566D00659FD5 /* ViewController.m */,
-				875D44C123ED59B700659FD5 /* AVPlayerViewController.h */,
-				875D44C223ED59B700659FD5 /* AVPlayerViewController.m */,
 				875D44BB23ED588900659FD5 /* NSString+Md5.h */,
 				875D44BC23ED588900659FD5 /* NSString+Md5.m */,
+				87FDFC6023F15E0000F44AB2 /* YoutubeExtractor.h */,
+				87FDFC6123F15E0000F44AB2 /* YoutubeExtractor.m */,
+				878A7E5D23F3ADF2009C98F3 /* YoutubeDownloadUrl.h */,
+				878A7E5E23F3ADF2009C98F3 /* YoutubeDownloadUrl.m */,
+				87FDFC6623F1912700F44AB2 /* YoutubeStreamingDataModel.h */,
+				87FDFC6723F1912700F44AB2 /* YoutubeStreamingDataModel.m */,
 				875D44BE23ED592700659FD5 /* AVSeparation.h */,
 				875D44BF23ED592700659FD5 /* AVSeparation.m */,
 				875D44AB23ED566D00659FD5 /* Main.storyboard */,
@@ -172,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				878CAA0323F7BDDC00C00717 /* JSDemo.html in Resources */,
 				875D44B223ED566D00659FD5 /* LaunchScreen.storyboard in Resources */,
 				875D44AF23ED566D00659FD5 /* Assets.xcassets in Resources */,
 				875D44AD23ED566D00659FD5 /* Main.storyboard in Resources */,
@@ -192,6 +211,8 @@
 				"${BUILT_PRODUCTS_DIR}/FreeStreamer/FreeStreamer.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
+				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -199,6 +220,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FreeStreamer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -232,9 +255,12 @@
 			files = (
 				875D44AA23ED566D00659FD5 /* ViewController.m in Sources */,
 				875D44B523ED566D00659FD5 /* main.m in Sources */,
-				875D44C323ED59B700659FD5 /* AVPlayerViewController.m in Sources */,
 				875D44C023ED592700659FD5 /* AVSeparation.m in Sources */,
+				878A7E5A23F2523D009C98F3 /* PSYouTubeExtractor.m in Sources */,
+				878A7E5F23F3ADF2009C98F3 /* YoutubeDownloadUrl.m in Sources */,
 				875D44BD23ED588900659FD5 /* NSString+Md5.m in Sources */,
+				87FDFC6223F15E0000F44AB2 /* YoutubeExtractor.m in Sources */,
+				87FDFC6823F1912700F44AB2 /* YoutubeStreamingDataModel.m in Sources */,
 				875D44A723ED566D00659FD5 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

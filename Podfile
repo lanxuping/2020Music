@@ -7,6 +7,8 @@ target '2020Music' do
 pod 'AFNetworking'
 pod 'FreeStreamer'
 pod 'Masonry'
-  # Pods for 2020Music
+pod 'YYModel'
+pod "youtube-ios-player-helper", "~> 0.1.4"
+# Pods for 2020Music
 
 end
