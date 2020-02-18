@@ -52,6 +52,7 @@ static NSString *decipherJsFileName = nil;
 static VideoMeta *videoMeta;
 
 - (void)getStreamUrlsWithVideoID:(NSString *)videoID {
+    self.videoID = videoID;
     NSString *ytInfoUrl = useHttp ? @"http://" : @"https://";
     NSString *eurl = [[@"https://youtube.googleapis.com/v/" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]] stringByAppendingString:videoID];
     NSString *youtubeUrl = [NSString stringWithFormat:@"www.youtube.com/get_video_info?video_id=%@&eurl=%@",videoID,eurl];
@@ -77,7 +78,23 @@ static VideoMeta *videoMeta;
         }
         if (sigEnc || statusFail) {
             [self watchVideoID:videoID sigEnc:sigEnc];
+        } else {
+            NSMutableDictionary *mp4URLs = [NSMutableDictionary dictionary];
+            NSArray *cephers = [self _matchLinkWithStr:streamMap withMatchStr:patUrl];
+            for (int i = 0; i < cephers.count; i ++) {
+                NSString *url = [self matchFirstLinkWithStr:cephers[i] withMatchStr:patUrl group:1];
+                NSString *itag = [self matchFirstLinkWithStr:url withMatchStr:patItag group:1];
+                if (!itag) {
+                    continue;
+                }
+                [mp4URLs setValue:url forKey:itag];
+            }
+            if ([self.delegate respondsToSelector:@selector(downloadUrlWithMP4UrlsDictionary:videoID:)]) {
+                [self.delegate downloadUrlWithMP4UrlsDictionary:mp4URLs videoID:_videoID];
+            }
         }
+//        NSArray *a = [self _matchLinkWithStr:streamMap withMatchStr:@"mimeType\":\"\""];
+//        NSLog(@"%@",a);
     }] resume];
 }
 
@@ -220,7 +237,9 @@ static VideoMeta *videoMeta;
         NSString *url = [[mp4URLs objectForKey:keys[i]] stringByAppendingString:[NSString stringWithFormat:@"&sig=%@",arr[i]]];
         [decipheredSignature setValue:url forKey:keys[i]];
     }
-    NSLog(@"%@",decipheredSignature);
+    if ([self.delegate respondsToSelector:@selector(downloadUrlWithMP4UrlsDictionary:videoID:)]) {
+        [self.delegate downloadUrlWithMP4UrlsDictionary:decipheredSignature videoID:_videoID];
+    }
 }
 
 - (void)parseVideoMeta:(NSString *)getVideoInfo {

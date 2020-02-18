@@ -18,12 +18,13 @@
 #import <youtube_ios_player_helper/youtube-ios-player-helper-umbrella.h>
 #import "YoutubeDownloadUrl.h"
 
+
 static NSString *patYtPlayer = @"<\\s*script\\s*>((.+?)jsbin\\\\/(player(_ias)?-(.+?).js)(.+?))</\\s*script\\s*>";
 static NSString *patDecryptionJsFile = @"jsbin\\\\/(player(_ias)?-(.+?).js)";
 static NSString *patCipher = @"\"cipher\"\\s*:\\s*\"(.+?)\"";
 
 
-@interface ViewController () <WKNavigationDelegate, YTPlayerViewDelegate>
+@interface ViewController () <WKNavigationDelegate, YTPlayerViewDelegate, YoutubeDownloadUrlDelegate>
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) FSAudioStream *audioStream;
 @property (nonatomic, strong) AVPlayer *player;
@@ -40,7 +41,8 @@ static NSString *patCipher = @"\"cipher\"\\s*:\\s*\"(.+?)\"";
     //arxdY8in7fY
     //nbqMIBYJlvk
     self.down = [[YoutubeDownloadUrl alloc] init];
-    [self.down  getStreamUrlsWithVideoID:@"j6hnv6CAAQA"];
+    [self.down  getStreamUrlsWithVideoID:@"LHCob76kigA"];
+    self.down.delegate = self;
 }
 
 - (void)youtubePlayerHelperView {
@@ -64,6 +66,14 @@ static NSString *patCipher = @"\"cipher\"\\s*:\\s*\"(.+?)\"";
         currentJsFileName = [currentJsFileName stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"];
         NSLog(@"1");
     }] resume];
+}
+- (void)downloadUrlWithMP4UrlsDictionary:(NSDictionary *)mp4Urls videoID:(NSString *)videoID{
+    if (!mp4Urls) {
+        return;
+    }
+    NSLog(@"download videoID : %@",videoID);
+    NSString *mp4 = mp4Urls[@"140"];
+    [self downloadWithVideoUrl:mp4];
 }
 
 - (IBAction)loadwebview:(id)sender {

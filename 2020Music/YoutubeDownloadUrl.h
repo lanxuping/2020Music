@@ -8,16 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <WebKit/WebKit.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
+@protocol YoutubeDownloadUrlDelegate <NSObject>
+
+- (void)downloadUrlWithMP4UrlsDictionary:(NSDictionary *)mp4Urls videoID:(NSString *)videoID;
+
+@end
 
 @interface YoutubeDownloadUrl : NSObject <UIWebViewDelegate>
 - (void)getStreamUrlsWithVideoID:(NSString *)videoID;
-@property (nonatomic, strong) UIWebView *web;
-@property (nonatomic ,strong) WKWebView *wkweb;
-@end
 
-NS_ASSUME_NONNULL_END
+@property (nonatomic, weak) id <YoutubeDownloadUrlDelegate> delegate;
+@property (nonatomic, strong) NSString *videoID;
+@end
