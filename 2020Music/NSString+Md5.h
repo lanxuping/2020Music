@@ -11,4 +11,5 @@
 @interface NSString (Md5)
 - (NSString *)md5;  /**< md5 加密 （小写） */
 - (NSString *)MD5;  /**< md5 加密 （大写） */
+- (NSURL *)url;
 @end

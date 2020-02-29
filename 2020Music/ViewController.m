@@ -40,9 +40,13 @@ static NSString *patCipher = @"\"cipher\"\\s*:\\s*\"(.+?)\"";
     [super viewDidLoad];
     //arxdY8in7fY
     //nbqMIBYJlvk
-    self.down = [[YoutubeDownloadUrl alloc] init];
-    [self.down  getStreamUrlsWithVideoID:@"LHCob76kigA"];
-    self.down.delegate = self;
+//    self.down = [[YoutubeDownloadUrl alloc] init];
+//    [self.down  getStreamUrlsWithVideoID:@"LHCob76kigA"];
+//    self.down.delegate = self;
+    
+//    YTPlayerView *v = [[YTPlayerView alloc] initWithFrame:CGRectMake(0, 0, 300, 150)];
+//    [v loadWithVideoId:@"LHCob76kigA" playerVars:@{@"playsinline":@1,@"origin":@"https://www.google.com"}];
+//    [self.view addSubview:v];
 }
 
 - (void)youtubePlayerHelperView {
@@ -79,7 +83,8 @@ static NSString *patCipher = @"\"cipher\"\\s*:\\s*\"(.+?)\"";
 - (IBAction)loadwebview:(id)sender {
     NSString *v1 = @"https://www.youtube.com/embed/vSBcrmx4aFw";//4min
 //    NSString *v2 = @"https://www.youtube.com/embed/arxdY8in7fY";//8min
-    [self loadYoutubeWebviewWirhUrl:v1];
+    NSString *click_jiuzhou = @"https://www.msn.com/ja-jp/weather/topstories/九州-桜の開花予想-第2回/ar-BB10bsWq?ocid=SautMedia";
+    [self loadYoutubeWebviewWirhUrl:click_jiuzhou];
 }
 - (IBAction)getDownloadVideoUrlAndSeparationMp3:(id)sender {
     NSString *JsStr = @"(document.getElementsByTagName(\"video\")[0]).src";
@@ -168,7 +173,7 @@ static NSString *patCipher = @"\"cipher\"\\s*:\\s*\"(.+?)\"";
     config.allowsAirPlayForMediaPlayback = YES;//允许播放，ios(8.0, 9.0)
     self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(50, 50, self.view.frame.size.width-100, 280) configuration:config];
     self.webView.navigationDelegate = self;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?autoplay=1&playsinline=1",url]]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[[NSString stringWithFormat:@"%@?autoplay=1&playsinline=1",url] url]]];
     [self.view addSubview:self.webView];
 }
 - (NSString *)syncExecFetchBodyScriptWithScript:(NSString *)script { //同步获取html，解决异步webview释放导致获取失败的问题。将defaultRunloop启动，不会阻塞主线程

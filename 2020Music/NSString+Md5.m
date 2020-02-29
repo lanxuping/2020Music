@@ -28,4 +28,10 @@
              result[8],result[9], result[10], result[11],result[12], result[13], result[14], result[15]] uppercaseString];
 }
 
+- (NSURL *)url{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
+    return [NSURL URLWithString:(NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)self, (CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]", NULL,kCFStringEncodingUTF8))];
+#pragma clang diagnostic pop
+}
 @end
